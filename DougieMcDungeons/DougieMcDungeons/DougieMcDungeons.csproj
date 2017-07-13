@@ -68,6 +68,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -78,9 +79,65 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Resources\enemies.csv" />
+    <None Include="Resources\equipment.csv" />
+    <None Include="Resources\essence.csv" />
+    <None Include="Resources\firstmap1.csv" />
+    <None Include="Resources\secondmap1.csv" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\black1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bridge1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dirtpath1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\elephant.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gnome.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\grass1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\grass2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\grass3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ooze.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pink.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\player1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pumpkin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\steve1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\teleport1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\water1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\water2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\yellow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
