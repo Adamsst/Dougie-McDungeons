@@ -19,10 +19,19 @@ namespace DougieMcDungeons.Classes
         public List<Point> mapImageNums = new List<Point>();
         public List<Point> enemyLocs = new List<Point>();
         public List<Point> invalidEnemyLocs = new List<Point>();
+        public Player player = new Player();
 
         public Game()
         {
             loadMap(mapName);
+            player.equipmentInventory.Add(new Equipment("Basic Helm[1]"));
+            player.equipmentInventory.Add(new Equipment("Basic Helm[1]"));
+            player.equipmentInventory.Add(new Equipment("Basic Helm[1]"));
+            player.equipmentInventory.Add(new Equipment("Basic Helm[1]"));
+            player.essenceInventory.Add(new Essence("Essence of Pumpkin"));
+            player.essenceInventory.Add(new Essence("Essence of Gnome"));
+            player.essenceInventory.Add(new Essence("Essence of Pumpkin"));
+
         }
 
         private void loadMap(string nextMap)
@@ -80,7 +89,7 @@ namespace DougieMcDungeons.Classes
                         }
                         else
                         {
-                            Form1.UpdateForm.NewFormEvent(1);
+                            Form1.UpdateForm.NewFormEvent(1, null);
                         }
                     }
                     break;
@@ -94,7 +103,7 @@ namespace DougieMcDungeons.Classes
                         }
                         else
                         {
-                            Form1.UpdateForm.NewFormEvent(1);
+                            Form1.UpdateForm.NewFormEvent(1, null);
                         }
                     }
                     break;
@@ -108,7 +117,7 @@ namespace DougieMcDungeons.Classes
                         }
                         else
                         {
-                            Form1.UpdateForm.NewFormEvent(1);
+                            Form1.UpdateForm.NewFormEvent(1, null);
                         }
                     }
                     break;
@@ -122,7 +131,7 @@ namespace DougieMcDungeons.Classes
                         }
                         else
                         {
-                            Form1.UpdateForm.NewFormEvent(1);
+                            Form1.UpdateForm.NewFormEvent(1, null);
                         }
                     }
                     break;
@@ -137,7 +146,7 @@ namespace DougieMcDungeons.Classes
             playerX = Convert.ToInt32(mapString.Substring(3, 3));
             playerY = Convert.ToInt32(mapString.Substring(6, 3));
             mapName = mapString.Substring(9);
-            Form1.UpdateForm.NewFormEvent(2);
+            Form1.UpdateForm.NewFormEvent(2, "You have now entered " + mapName);
             loadMap(mapName);
         }
     }
