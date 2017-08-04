@@ -1,0 +1,14 @@
+NoStat Head,NoStat Head,,Head,1
+NoStat Chest,NoStat Chest,,Chest,0
+NoStat Hands,NoStat Hands,,Hands,0
+NoStat Legs,NoStat Legs,,Legs,0,def,1
+NoStat Feet,NoStat Feet,,Feet,0
+NoStat Weapon,NoStat Weapon,,Weapon,0
+Basic Helm,Basic Helm,,Head,0,def,1
+Basic Helm[1],Basic Helm,[1],Head,1,def,1
+Short Sword,Short Sword,,Weapon,0,atk,3
+Novice Staff,Novice Staff,,Weapon,0,matk,2
+Tattered Shoes,Tattered Shoes,,Feet,0,mdef,1
+Ripped Gloves,Ripped Gloves,,Hands,0,mdef,1
+Plain Shirt,Plain Shirt,,Chest,0,maxhp,5
+Denim Shorts[1],Denim Shorts,[1],Legs,1
