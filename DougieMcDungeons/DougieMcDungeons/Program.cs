@@ -19,4 +19,15 @@ namespace DougieMcDungeons
             Application.Run(new Form1());
         }
     }
+
+    /*public struct Stats
+    {
+        public string statistic;
+        public int magnitude;
+        public Stats(string sta, int mag)
+        {
+            statistic = sta;
+            magnitude = mag;
+        }
+    }*/
 }
