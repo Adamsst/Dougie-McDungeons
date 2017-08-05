@@ -15,15 +15,17 @@ namespace DougieMcDungeons
     {
         private char? moveDirection = null;
         public Game theGame = new Game();
-        public delegate void UpdateFormDelegate(int operation);
+        public delegate void UpdateFormDelegate(int operation, string message);
 
         public Form1()
         {
             InitializeComponent();
             UpdateForm.OnNewFormEvent += UpdateFormEvent_OnNewFormEvent;
             movementTimer.Interval = 200;
-            movementTimer.Start();
-            UpdateFormEvent_OnNewFormEvent(2);
+            movementTimer.Start();         
+            coordinatesLabel.DataBindings.Add("Text", theGame, "coordinates", true, DataSourceUpdateMode.OnPropertyChanged);
+            skillPicturesUpdate();
+            UpdateFormEvent_OnNewFormEvent(2, "Your journey begins!");
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -48,20 +50,39 @@ namespace DougieMcDungeons
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            switch (e.KeyCode)
+            e.SuppressKeyPress = true;//We do what we please with our key presses! (no really, cancel any undesired effects such as textbox scrolling with S key)
+            if (!theGame.inBattle)
             {
-                case Keys.W:
-                    moveDirection = 'W';
-                    break;
-                case Keys.A:
-                    moveDirection = 'A';
-                    break;
-                case Keys.S:
-                    moveDirection = 'S';
-                    break;
-                case Keys.D:
-                    moveDirection = 'D';
-                    break;
+                switch (e.KeyCode)
+                {
+                    case Keys.W:
+                        moveDirection = 'W';
+                        break;
+                    case Keys.A:
+                        moveDirection = 'A';
+                        break;
+                    case Keys.S:
+                        moveDirection = 'S';
+                        break;
+                    case Keys.D:
+                        moveDirection = 'D';
+                        break;
+                    case Keys.X:
+                        moveDirection = null;
+                        break;
+                }
+            }
+            else if (theGame.inBattle)
+            {
+                switch (e.KeyCode)
+                {
+                    case Keys.D0:
+                        theGame.battleTurn(0);
+                        break;
+                    case Keys.D1:
+                        theGame.battleTurn(1);
+                        break;
+                }
             }
         }
 
@@ -74,30 +95,109 @@ namespace DougieMcDungeons
             Invalidate();
         }
 
-        public void UpdateFormEvent_OnNewFormEvent(int operation)
+        public void UpdateFormEvent_OnNewFormEvent(int operation, string message)
         {
-            if(operation == 1)
+            if (operation == 1)
             {
-                coordinatesLabel.Text = "Coordinates: " + (theGame.playerX - 8).ToString() + ", " + (theGame.playerY - 8).ToString();
+                updateMessageBox(message);
             }
             else if (operation == 2)
             {
-                coordinatesLabel.Text = "Coordinates: " + (theGame.playerX - 8).ToString() + ", " + (theGame.playerY - 8).ToString();
                 mapLabel.Text = "Current Map: " + theGame.activeMap.mapsName;
                 moveDirection = null;
+                playerLabelUpdate();
+                updateMessageBox(message);
+            }
+            else if(operation == 3)
+            {
+                movementTimer.Start();
+                playerEquipLabelUpdate();
+                playerLabelUpdate();
+            }
+            else if(operation == 4)
+            {
+                updateMessageBox(message);
+                moveDirection = null;
+                movementTimer.Stop();
             }
         }
 
+        private void playerLabelUpdate()
+        {
+            healthLabel.Text = "Health: " + theGame.player.totalStats["hp"] + " / " + theGame.player.totalStats["maxhp"];
+            atkLabel.Text = "ATK: " + theGame.player.totalStats["atk"];
+            matkLabel.Text = "MATK: " + theGame.player.totalStats["matk"];
+            defLabel.Text = "DEF: " + theGame.player.totalStats["def"];
+            mdefLabel.Text = "MDEF: " + theGame.player.totalStats["mdef"];
+            atkcritLabel.Text = "ATK Crit: " + theGame.player.totalStats["atkcrit"];
+            matkcritLabel.Text = "MATK Crit: " + theGame.player.totalStats["matkcrit"];
+            atkhitLabel.Text = "ATK Hit: " + theGame.player.totalStats["atkhit"];
+            matkhitLabel.Text = "MATK Hit: " + theGame.player.totalStats["matkhit"];
+        }
 
+        private void playerEquipLabelUpdate()
+        {
+            headLabel.Text = (theGame.player.head == null) ? headLabel.Text = "None" : headLabel.Text = theGame.player.head.name;
+            chestLabel.Text = (theGame.player.chest == null) ? chestLabel.Text = "None" : chestLabel.Text = theGame.player.chest.name;
+            handsLabel.Text = (theGame.player.hands == null) ? handsLabel.Text = "None" : handsLabel.Text = theGame.player.hands.name;
+            legsLabel.Text = (theGame.player.legs == null) ? legsLabel.Text = "None" : legsLabel.Text = theGame.player.legs.name;
+            feetLabel.Text = (theGame.player.feet == null) ? feetLabel.Text = "None" : feetLabel.Text = theGame.player.feet.name;
+            weaponLabel.Text = (theGame.player.weapon == null) ? weaponLabel.Text = "None" : weaponLabel.Text = theGame.player.weapon.name;
+        }
+
+        private void updateMessageBox(string msg)
+        {
+            messageBox.Items.Insert(0, msg);
+            if (messageBox.Items.Count > 25)
+            {
+                messageBox.Items.RemoveAt(25);
+            }
+        }
+
+        private void inventoryButton_Click(object sender, EventArgs e)
+        {
+            movementTimer.Stop();
+            moveDirection = null;
+            Inventory inventory = new Inventory(theGame.player);
+            inventory.Show();
+            try { headLabel.Text = theGame.player.head.name; }
+            catch (Exception ex) { };
+        }
 
         public static class UpdateForm
         {
             public static event UpdateFormDelegate OnNewFormEvent;
 
-            public static void NewFormEvent(int operation)
+            public static void NewFormEvent(int operation, string message)
             {
-                OnNewFormEvent(operation);
+                OnNewFormEvent(operation, message);
             }
         }
+
+        private void skillPicturesUpdate()
+        {
+            skill0Picture.Image = (theGame.player.skillSet[0].name == "None") ? Properties.Resources.noSkill : theGame.player.skillSet[0].img;
+            skill1Picture.Image = (theGame.player.skillSet[1].name == "None") ? Properties.Resources.noSkill : theGame.player.skillSet[1].img;
+            skill2Picture.Image = (theGame.player.skillSet[2].name == "None") ? Properties.Resources.noSkill : theGame.player.skillSet[2].img;
+            skill3Picture.Image = (theGame.player.skillSet[3].name == "None") ? Properties.Resources.noSkill : theGame.player.skillSet[3].img;
+            skill4Picture.Image = (theGame.player.skillSet[4].name == "None") ? Properties.Resources.noSkill : theGame.player.skillSet[4].img;
+            skill5Picture.Image = (theGame.player.skillSet[5].name == "None") ? Properties.Resources.noSkill : theGame.player.skillSet[5].img;
+            skill6Picture.Image = (theGame.player.skillSet[6].name == "None") ? Properties.Resources.noSkill : theGame.player.skillSet[6].img;
+            skill7Picture.Image = (theGame.player.skillSet[7].name == "None") ? Properties.Resources.noSkill : theGame.player.skillSet[7].img;
+            skill8Picture.Image = (theGame.player.skillSet[8].name == "None") ? Properties.Resources.noSkill : theGame.player.skillSet[8].img;
+            skill9Picture.Image = (theGame.player.skillSet[9].name == "None") ? Properties.Resources.noSkill : theGame.player.skillSet[9].img;
+        }
     }
+
+    public struct Stats
+    {
+        public string statistic;
+        public int magnitude;
+        public Stats(string sta, int mag)
+        {
+            statistic = sta;
+            magnitude = mag;
+        }
+    }
+
 }

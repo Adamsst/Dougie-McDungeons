@@ -101,9 +101,9 @@ namespace DougieMcDungeons.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to elephant,10,1,1,1,1,1,1,1,1,1
-        ///gnome,10,1,1,1,1,1,1,1,1,1
-        ///ooze,10,1,1,1,1,1,1,1,1,1
+        ///   Looks up a localized string similar to elephant,20,1,1,1,1,1,1,1,1,1
+        ///gnome,25,1,1,1,1,1,1,1,1,1
+        ///ooze,15,1,1,1,1,1,1,1,1,1
         ///pumpkin,10,1,1,1,1,1,1,1,1,1.
         /// </summary>
         internal static string enemies {
@@ -113,21 +113,19 @@ namespace DougieMcDungeons.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to NoStat Head of Steve,Head,1
-        ///NoStat Chest,Chest,0
-        ///NoStat Hands,Hands,0
-        ///NoStat Legs,Legs,0,def,1
-        ///NoStat Feet,Feet,0
-        ///NoStat Weapon,Weapon,0
-        ///Basic Helm,Head,0,def,1
-        ///Basic Helm[1],Head,1,def,1
-        ///Short Sword,Weapon,0,atk,3
-        ///Novice Staff,Weapon,0,matk,2
-        ///Tattered Shoes,Feet,0,mdef,1
-        ///Ripped Gloves,Hands,0,mdef,1
-        ///Plain Shirt,Chest,0,maxhp,5
-        ///Denim Shorts[1],Legs,1
-        ///.
+        ///   Looks up a localized string similar to NoStat Head,NoStat Head,,Head,1
+        ///NoStat Chest,NoStat Chest,,Chest,0
+        ///NoStat Hands,NoStat Hands,,Hands,0
+        ///NoStat Legs,NoStat Legs,,Legs,0,def,1
+        ///NoStat Feet,NoStat Feet,,Feet,0
+        ///NoStat Weapon,NoStat Weapon,,Weapon,0
+        ///Basic Helm,Basic Helm,,Head,0,def,1
+        ///Basic Helm[1],Basic Helm,[1],Head,1,def,1
+        ///Short Sword,Short Sword,,Weapon,0,atk,3
+        ///Novice Staff,Novice Staff,,Weapon,0,matk,2
+        ///Tattered Shoes,Tattered Shoes,,Feet,0,mdef,1
+        ///Ripped Gloves,Ripped Gloves,,Hands,0,mdef,1
+        ///Plain Shirt,Plain Shirt,,Chest,0,maxhp,5 [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string equipment {
             get {
@@ -211,6 +209,16 @@ namespace DougieMcDungeons.Properties {
         internal static System.Drawing.Bitmap grass3 {
             get {
                 object obj = ResourceManager.GetObject("grass3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap noSkill {
+            get {
+                object obj = ResourceManager.GetObject("noSkill", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
