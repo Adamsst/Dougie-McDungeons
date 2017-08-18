@@ -9,7 +9,7 @@ namespace DougieMcDungeons.Classes
 {
     public class Skill
     {
-        public string name = "None";
+        protected string _name = "None";
         protected int _Cooldown;
         public Image img;
         protected Random rand;
@@ -31,13 +31,19 @@ namespace DougieMcDungeons.Classes
             get { return _Cooldown; }
             set { _Cooldown = Math.Max(0, value); }
         }
+
+        public string name
+        {
+            get { return _name; }
+            set { _name = value; }
+        }
     }
 
     public class SimpleStrike : Skill
     {
         public SimpleStrike(Player p) : base(p)
         {
-            name = "Simple Strike";
+            _name = "Simple Strike";
             cooldown = 5;
             img = Properties.Resources.simplestrike;
             maxCooldown = 5;
@@ -78,18 +84,13 @@ namespace DougieMcDungeons.Classes
             }
         }
 
-        public int cooldown
-        {
-            get;
-            set;
-        }
     }
 
-    public class ExhaustedStrike : Skill
+    public class ExhaustedSwing : Skill
     {
-        public ExhaustedStrike(Player p) : base(p)
+        public ExhaustedSwing(Player p) : base(p)
         {
-            name = "Exhausted Strike";
+            _name = "Exhausted Strike";
             _Cooldown = 0;
             img = Properties.Resources.exhaustedstrike;
             maxCooldown = 5;
@@ -124,4 +125,51 @@ namespace DougieMcDungeons.Classes
 
     }
 
+    public class SorcerersGambit : Skill
+    {
+        public SorcerersGambit(Player p) : base(p)
+        {
+            _name = "Sorcerers Gambit";
+            _Cooldown = 0;
+            img = Properties.Resources.sorcerersgambit;
+            maxCooldown = 5;
+            skillPlayer = p;
+        }
+
+        public override int attack(Enemy e)
+        {
+            cooldown = maxCooldown;
+            int totalDamage = 0;
+            int reducDamage = 0;
+            rand = new Random();
+            if ((rand.Next(0, 100) < skillPlayer.totalStats["matkhit"]))
+            {
+                Form1.UpdateForm.NewFormEvent(1, "Sorcerers gambit fails.");
+                return 0;
+            }
+            else
+            {
+                for (int i = 0; i < e.mdef; i++)
+                {
+                    if (rand.Next(0, 10) == 0)
+                    {
+                        reducDamage++;
+                    }
+                }
+
+                if (rand.Next(0, 100) < skillPlayer.totalStats["matkcrit"])
+                {
+                    totalDamage = rand.Next(0, (skillPlayer.totalStats["matk"] * 3)) * 2;
+                    Form1.UpdateForm.NewFormEvent(1, "Sorcerers Gambit connects for " + Math.Max(0, (totalDamage - reducDamage)) + " damage.");
+                }
+                else
+                {
+                    totalDamage = rand.Next(0, (skillPlayer.totalStats["matk"] * 3));
+                    Form1.UpdateForm.NewFormEvent(1, "Sorcerers Gambit connects for " + Math.Max(0, (totalDamage - reducDamage)) + " damage.");
+                }
+
+                return Math.Max(0, (totalDamage - reducDamage));
+            }
+        }
+    }
 }
