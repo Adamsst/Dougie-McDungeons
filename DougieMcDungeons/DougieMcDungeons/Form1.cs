@@ -82,6 +82,30 @@ namespace DougieMcDungeons
                     case Keys.D1:
                         theGame.battleTurn(1);
                         break;
+                    case Keys.D2:
+                        theGame.battleTurn(2);
+                        break;
+                    case Keys.D3:
+                        theGame.battleTurn(3);
+                        break;
+                    case Keys.D4:
+                        theGame.battleTurn(4);
+                        break;
+                    case Keys.D5:
+                        theGame.battleTurn(5);
+                        break;
+                    case Keys.D6:
+                        theGame.battleTurn(6);
+                        break;
+                    case Keys.D7:
+                        theGame.battleTurn(7);
+                        break;
+                    case Keys.D8:
+                        theGame.battleTurn(8);
+                        break;
+                    case Keys.D9:
+                        theGame.battleTurn(9);
+                        break;
                 }
             }
         }
@@ -120,6 +144,13 @@ namespace DougieMcDungeons
                 moveDirection = null;
                 movementTimer.Stop();
             }
+            else if (operation == 5)
+            {
+                //updateMessageBox(message);
+                //moveDirection = null;
+                movementTimer.Start();
+                skillPicturesUpdate();
+            }
         }
 
         private void playerLabelUpdate()
@@ -156,21 +187,12 @@ namespace DougieMcDungeons
 
         private void inventoryButton_Click(object sender, EventArgs e)
         {
-            movementTimer.Stop();
-            moveDirection = null;
-            Inventory inventory = new Inventory(theGame.player);
-            inventory.Show();
-            try { headLabel.Text = theGame.player.head.name; }
-            catch (Exception ex) { };
-        }
-
-        public static class UpdateForm
-        {
-            public static event UpdateFormDelegate OnNewFormEvent;
-
-            public static void NewFormEvent(int operation, string message)
+            if (!theGame.inBattle)
             {
-                OnNewFormEvent(operation, message);
+                movementTimer.Stop();
+                moveDirection = null;
+                Inventory inventory = new Inventory(theGame.player);
+                inventory.Show();
             }
         }
 
@@ -186,6 +208,27 @@ namespace DougieMcDungeons
             skill7Picture.Image = (theGame.player.skillSet[7].name == "None") ? Properties.Resources.noSkill : theGame.player.skillSet[7].img;
             skill8Picture.Image = (theGame.player.skillSet[8].name == "None") ? Properties.Resources.noSkill : theGame.player.skillSet[8].img;
             skill9Picture.Image = (theGame.player.skillSet[9].name == "None") ? Properties.Resources.noSkill : theGame.player.skillSet[9].img;
+        }
+
+        private void skillsButton_Click(object sender, EventArgs e)
+        {
+            if (!theGame.inBattle)
+            {
+                movementTimer.Stop();
+                moveDirection = null;
+                Skills skills = new Skills(theGame.player);
+                skills.Show();
+            }
+        }
+
+        public static class UpdateForm
+        {
+            public static event UpdateFormDelegate OnNewFormEvent;
+
+            public static void NewFormEvent(int operation, string message)
+            {
+                OnNewFormEvent(operation, message);
+            }
         }
     }
 

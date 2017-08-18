@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DougieMcDungeons.Classes
 {
@@ -15,6 +12,7 @@ namespace DougieMcDungeons.Classes
         public Skill[] skillSet = new Skill[10];
         public List<Equipment> equipmentInventory = new List<Equipment>();
         public List<Essence> essenceInventory = new List<Essence>();
+        public List<Skill> skillInventory = new List<Skill>();
         public Equipment head = null;
         public Equipment chest = null;
         public Equipment legs = null;
@@ -61,8 +59,8 @@ namespace DougieMcDungeons.Classes
             totalStats.Add("matkhit", 0);
 
             calculateTotalStats();
-            skillSet[0] = new ExhaustedStrike(this);
-            skillSet[1] = new SimpleStrike(this);
+            skillSet[0] = new ExhaustedSwing(this);
+            skillSet[1] = new Skill(this);
             skillSet[2] = new Skill(this);
             skillSet[3] = new Skill(this);
             skillSet[4] = new Skill(this);
@@ -71,6 +69,9 @@ namespace DougieMcDungeons.Classes
             skillSet[7] = new Skill(this);
             skillSet[8] = new Skill(this);
             skillSet[9] = new Skill(this);
+            skillInventory.Add(new Skill(this));
+            skillInventory.Add(new SorcerersGambit(this));
+            skillInventory.Add(new SimpleStrike(this));
         }
 
         private void calculateTotalStats()

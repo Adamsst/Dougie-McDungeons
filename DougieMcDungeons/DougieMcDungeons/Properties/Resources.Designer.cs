@@ -135,7 +135,9 @@ namespace DougieMcDungeons.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to Essence of Pumpkin,Legs, of Pumpkin,maxhp,5
-        ///Essence of Gnome,Head, of Gnome,atkcrit,1.
+        ///Essence of Gnome,Head, of Gnome,atk,1
+        ///Essence of Ooze,Feet, of Ooze,matk,3
+        ///Essence of Elephant,Hands, of Elephant,def,1,mdef,1.
         /// </summary>
         internal static string essence {
             get {
@@ -289,6 +291,16 @@ namespace DougieMcDungeons.Properties {
         internal static System.Drawing.Bitmap simplestrike {
             get {
                 object obj = ResourceManager.GetObject("simplestrike", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap sorcerersgambit {
+            get {
+                object obj = ResourceManager.GetObject("sorcerersgambit", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

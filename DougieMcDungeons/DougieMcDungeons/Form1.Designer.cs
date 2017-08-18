@@ -75,6 +75,7 @@
             this.skill8Picture = new System.Windows.Forms.PictureBox();
             this.skill9Picture = new System.Windows.Forms.PictureBox();
             this.skill0Picture = new System.Windows.Forms.PictureBox();
+            this.skillsButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.skill1Picture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.skill2Picture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.skill3Picture)).BeginInit();
@@ -486,11 +487,22 @@
             this.skill0Picture.TabIndex = 44;
             this.skill0Picture.TabStop = false;
             // 
+            // skillsButton
+            // 
+            this.skillsButton.Location = new System.Drawing.Point(660, 672);
+            this.skillsButton.Name = "skillsButton";
+            this.skillsButton.Size = new System.Drawing.Size(98, 51);
+            this.skillsButton.TabIndex = 45;
+            this.skillsButton.Text = "Skills";
+            this.skillsButton.UseVisualStyleBackColor = true;
+            this.skillsButton.Click += new System.EventHandler(this.skillsButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 762);
+            this.Controls.Add(this.skillsButton);
             this.Controls.Add(this.skill0Picture);
             this.Controls.Add(this.skill9Picture);
             this.Controls.Add(this.skill8Picture);
@@ -604,6 +616,7 @@
         private System.Windows.Forms.PictureBox skill8Picture;
         private System.Windows.Forms.PictureBox skill9Picture;
         private System.Windows.Forms.PictureBox skill0Picture;
+        private System.Windows.Forms.Button skillsButton;
     }
 }
 
