@@ -9,11 +9,12 @@ namespace DougieMcDungeons.Classes
 {
     public class Skill
     {
+
         protected string _name = "None";
         protected int _Cooldown;
         public Image img;
         protected Random rand;
-        public int maxCooldown;
+        public int maxCooldown;//Actual Cooldown will be 1 less than max because a skill cools down by 1 on use
         protected Player skillPlayer;
 
         public Skill(Player p)
@@ -39,14 +40,14 @@ namespace DougieMcDungeons.Classes
         }
     }
 
-    public class SimpleStrike : Skill
+    public class ExhaustedSwing : Skill
     {
-        public SimpleStrike(Player p) : base(p)
+        public ExhaustedSwing(Player p) : base(p)
         {
-            _name = "Simple Strike";
-            cooldown = 5;
-            img = Properties.Resources.simplestrike;
-            maxCooldown = 5;
+            _name = "Exhausted Strike";
+            _Cooldown = 0;
+            img = Properties.Resources.exhaustedstrike;
+            maxCooldown = 0;
             skillPlayer = p;
         }
 
@@ -56,7 +57,46 @@ namespace DougieMcDungeons.Classes
             int totalDamage = 0;
             int reducDamage = 0;
             rand = new Random();
-            if(!(rand.Next(0,100) < skillPlayer.totalStats["atkhit"]))
+            if ((rand.Next(0, 100) > (skillPlayer.totalStats["atkhit"] / 2)))
+            {
+                Form1.UpdateForm.NewFormEvent(1, "Exhausted Swing misses.");
+                return 0;
+            }
+            else
+            {
+                for (int i = 0; i < e.def; i++)
+                {
+                    if (rand.Next(0, 10) == 0)
+                    {
+                        reducDamage++;
+                    }
+                }
+                totalDamage = skillPlayer.totalStats["atk"];
+                Form1.UpdateForm.NewFormEvent(1, "Exhausted Swing hits for " + Math.Max(0, (totalDamage - reducDamage)) + " damage.");
+                return Math.Max(0, (totalDamage - reducDamage));
+            }
+        }
+
+    }
+
+    public class SimpleStrike : Skill
+    {
+        public SimpleStrike(Player p) : base(p)
+        {
+            _name = "Simple Strike";
+            cooldown = 0;
+            img = Properties.Resources.simplestrike;
+            maxCooldown = 6;
+            skillPlayer = p;
+        }
+
+        public override int attack(Enemy e)
+        {
+            cooldown = maxCooldown;
+            int totalDamage = 0;
+            int reducDamage = 0;
+            rand = new Random();
+            if((rand.Next(0,100) > skillPlayer.totalStats["atkhit"]))
             {
                 Form1.UpdateForm.NewFormEvent(1, "Simple Strike misses.");
                 return 0;
@@ -86,45 +126,6 @@ namespace DougieMcDungeons.Classes
 
     }
 
-    public class ExhaustedSwing : Skill
-    {
-        public ExhaustedSwing(Player p) : base(p)
-        {
-            _name = "Exhausted Strike";
-            _Cooldown = 0;
-            img = Properties.Resources.exhaustedstrike;
-            maxCooldown = 5;
-            skillPlayer = p;
-        }
-
-        public override int attack(Enemy e)
-        {
-            cooldown = maxCooldown;
-            int totalDamage = 0;
-            int reducDamage = 0;
-            rand = new Random();
-            if (!(rand.Next(0, 100) < (skillPlayer.totalStats["atkhit"] / 2)))
-            {
-                Form1.UpdateForm.NewFormEvent(1, "Exhausted Swing misses.");
-                return 0;
-            }
-            else
-            {
-                for (int i = 0; i < e.def; i++)
-                {
-                    if (rand.Next(0, 10) == 0)
-                    {
-                        reducDamage++;
-                    }
-                }
-                totalDamage = skillPlayer.totalStats["atk"];
-                Form1.UpdateForm.NewFormEvent(1, "Exhausted Swing hits for " + Math.Max(0, (totalDamage - reducDamage)) + " damage.");
-                return Math.Max(0, (totalDamage - reducDamage));
-            }
-        }
-
-    }
-
     public class SorcerersGambit : Skill
     {
         public SorcerersGambit(Player p) : base(p)
@@ -132,7 +133,7 @@ namespace DougieMcDungeons.Classes
             _name = "Sorcerers Gambit";
             _Cooldown = 0;
             img = Properties.Resources.sorcerersgambit;
-            maxCooldown = 5;
+            maxCooldown = 4;
             skillPlayer = p;
         }
 
@@ -142,7 +143,7 @@ namespace DougieMcDungeons.Classes
             int totalDamage = 0;
             int reducDamage = 0;
             rand = new Random();
-            if ((rand.Next(0, 100) < skillPlayer.totalStats["matkhit"]))
+            if ((rand.Next(0, 100) > skillPlayer.totalStats["matkhit"]))
             {
                 Form1.UpdateForm.NewFormEvent(1, "Sorcerers gambit fails.");
                 return 0;

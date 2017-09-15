@@ -22,7 +22,7 @@ namespace DougieMcDungeons
             InitializeComponent();
             UpdateForm.OnNewFormEvent += UpdateFormEvent_OnNewFormEvent;
             movementTimer.Interval = 200;
-            movementTimer.Start();         
+            movementTimer.Start();
             coordinatesLabel.DataBindings.Add("Text", theGame, "coordinates", true, DataSourceUpdateMode.OnPropertyChanged);
             skillPicturesUpdate();
             UpdateFormEvent_OnNewFormEvent(2, "Your journey begins!");
@@ -132,13 +132,13 @@ namespace DougieMcDungeons
                 playerLabelUpdate();
                 updateMessageBox(message);
             }
-            else if(operation == 3)
+            else if (operation == 3)
             {
                 movementTimer.Start();
                 playerEquipLabelUpdate();
                 playerLabelUpdate();
             }
-            else if(operation == 4)
+            else if (operation == 4)
             {
                 updateMessageBox(message);
                 moveDirection = null;
@@ -146,10 +146,12 @@ namespace DougieMcDungeons
             }
             else if (operation == 5)
             {
-                //updateMessageBox(message);
-                //moveDirection = null;
                 movementTimer.Start();
                 skillPicturesUpdate();
+            }
+            else if (operation == 6)
+            {
+                playerLabelUpdate();
             }
         }
 
@@ -221,6 +223,48 @@ namespace DougieMcDungeons
             }
         }
 
+        private void skillPictureOnClick(object sender, EventArgs e)
+        {
+            PictureBox pb = (PictureBox)sender;
+            int skillNum = 0;
+            switch (pb.Name)
+            {
+                case "skill0Picture":
+                    skillNum = 0;
+                    break;
+                case "skill1Picture":
+                    skillNum = 1;
+                    break;
+                case "skill2Picture":
+                    skillNum = 2;
+                    break;
+                case "skill3Picture":
+                    skillNum = 3;
+                    break;
+                case "skill4Picture":
+                    skillNum = 4;
+                    break;
+                case "skill5Picture":
+                    skillNum = 5;
+                    break;
+                case "skill6Picture":
+                    skillNum = 6;
+                    break;
+                case "skill7Picture":
+                    skillNum = 7;
+                    break;
+                case "skill8Picture":
+                    skillNum = 8;
+                    break;
+                case "skill9Picture":
+                    skillNum = 9;
+                    break;
+                default:
+                    break;
+            }
+            skillNameLabel.Text = "Skill: " + theGame.player.skillSet[skillNum].name;
+            skillCooldownLabel.Text = "Cooldown: " + theGame.player.skillSet[skillNum].cooldown.ToString();
+        }
         public static class UpdateForm
         {
             public static event UpdateFormDelegate OnNewFormEvent;

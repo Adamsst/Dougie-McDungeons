@@ -16,12 +16,15 @@ namespace DougieMcDungeons.Classes
         private int maxNumEnemies = 0;
         public List<string[]> mapImageNums = new List<string[]>();
         private List<string> enemyTypes = new List<string>();
+        public List<Point> mapEnemyLocs = new List<Point>();
         public List<Enemy> enemiesOnMap = new List<Enemy>();
         private Random rand = new Random();
 
         public Map(string mapName)
         {
             mapsName = mapName;
+            int i = 0;//Our tracking index to keep track of where we are in the map file 
+
             string[] mapFile = null;
             if (mapName == "firstmap")
             {
@@ -30,6 +33,10 @@ namespace DougieMcDungeons.Classes
             else if (mapName == "secondmap")
             {
                 mapFile = Properties.Resources.secondMap1.Split('\n');
+            }
+            else if (mapName == "Spooky Ghosts Lair")
+            {
+                mapFile = Properties.Resources.spookyghost.Split('\n');
             }
 
             for (int x = 0; x < mapFile.Length; x++)
@@ -40,10 +47,15 @@ namespace DougieMcDungeons.Classes
             }
             yLength = mapFile.Length - 1;
 
-            minNumEnemies = Convert.ToInt32(mapImageNums[0][0].Substring(3));
-            maxNumEnemies = Convert.ToInt32(mapImageNums[1][0].Substring(3));
-
-            for (int i = 4; i > 0; i++)
+            minNumEnemies = Convert.ToInt32(mapImageNums[i][0].Substring(3));
+            i++;
+            maxNumEnemies = Convert.ToInt32(mapImageNums[i][0].Substring(3));
+            i++;
+            //2 was originally intended to be an enemy min level
+            i++;
+            //3 was originally intended to be an enemy max level
+            i++;
+            for (i = 4; i > 0; i++)//Reassign i but we will always be at 4 here
             {
                 if (mapImageNums[i][0].Substring(3) != "end")
                 {
@@ -51,13 +63,13 @@ namespace DougieMcDungeons.Classes
                 }
                 else
                 {
-                    i = -1;
+                    break;
                 }
             }
 
             int numEnemies = rand.Next(minNumEnemies, maxNumEnemies + 1);
 
-            for (int i = 0; i < numEnemies; i++)
+            for (int j = 0; j < numEnemies; j++)
             {
                 switch (enemyTypes[rand.Next(0, (enemyTypes.Count))])
                 {
@@ -73,8 +85,30 @@ namespace DougieMcDungeons.Classes
                     case "pumpkin":
                         enemiesOnMap.Add(new Pumpkin("pumpkin"));
                         break;
+                    case "ghost":
+                        enemiesOnMap.Add(new Ghost("ghost"));
+                        break;
                 }
             }
+
+            if(minNumEnemies == maxNumEnemies)//When we define an exact number of enemies we will define their locs too
+            {
+                i++;
+                while(i > 0)
+                {
+                    if (mapImageNums[i][0].Substring(3) != "end")
+                    {
+                        mapEnemyLocs.Add(new Point(Convert.ToInt32(mapImageNums[i][0].Substring(3)), Convert.ToInt32(mapImageNums[i + 1][0].Substring(3))));
+                        i++;
+                        i++;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+
 
         }
 

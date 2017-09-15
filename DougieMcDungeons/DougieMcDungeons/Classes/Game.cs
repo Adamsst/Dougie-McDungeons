@@ -26,18 +26,10 @@ namespace DougieMcDungeons.Classes
         public Game()
         {
             loadMap(mapName);
-            player.equipmentInventory.Add(new Equipment("Basic Helm[1]"));
-            player.equipmentInventory.Add(new Equipment("Basic Helm[1]"));
-            player.equipmentInventory.Add(new Equipment("Basic Helm[1]"));
-            player.equipmentInventory.Add(new Equipment("Basic Helm[1]"));
-            player.essenceInventory.Add(new Essence("Essence of Pumpkin"));
-            player.essenceInventory.Add(new Essence("Essence of Gnome"));
-            player.essenceInventory.Add(new Essence("Essence of Pumpkin"));
-            player.essenceInventory.Add(new Essence("Essence of Gnome"));
-            player.essenceInventory.Add(new Essence("Essence of Gnome"));
-            player.essenceInventory.Add(new Essence("Essence of Gnome"));
-            player.essenceInventory.Add(new Essence("Essence of Gnome"));
-            player.essenceInventory.Add(new Essence("Essence of Gnome"));
+            //player.equipmentInventory.Add(new Equipment("Basic Helm[1]"));
+            //player.equipmentInventory.Add(new Equipment("Basic Helm[1]"));
+            //player.essenceInventory.Add(new Essence("Essence of Pumpkin"));
+            //player.essenceInventory.Add(new Essence("Essence of Gnome"));
         }
 
         private void loadMap(string nextMap)
@@ -53,29 +45,39 @@ namespace DougieMcDungeons.Classes
 
             invalidEnemyLocs.Clear();
             enemyLocs.Clear();
-            for (int i = 0; i < activeMap.enemiesOnMap.Count; i++)
+            if (activeMap.mapEnemyLocs.Count == 0)
             {
-                Point P = new Point(rand.Next(0, (activeMap.xLength - 16)), rand.Next(0, (activeMap.yLength - 16)));
-                if (!invalidEnemyLocs.Contains(P) && (activeMap.mapImageNums[P.Y + 8][P.X + 8] == "003" || activeMap.mapImageNums[P.Y + 8][P.X + 8] == "002" || activeMap.mapImageNums[P.Y + 8][P.X + 8] == "001"))
+                for (int i = 0; i < activeMap.enemiesOnMap.Count; i++)
                 {
-                    enemyLocs.Add(P);
-                    invalidEnemyLocs.Add(new Point(P.X, P.Y));
-                    invalidEnemyLocs.Add(new Point(P.X - 1, P.Y - 1));
-                    invalidEnemyLocs.Add(new Point(P.X - 1, P.Y + 1));
-                    invalidEnemyLocs.Add(new Point(P.X + 1, P.Y - 1));
-                    invalidEnemyLocs.Add(new Point(P.X + 1, P.Y + 1));
-                    invalidEnemyLocs.Add(new Point(P.X, P.Y - 2));
-                    invalidEnemyLocs.Add(new Point(P.X, P.Y - 1));
-                    invalidEnemyLocs.Add(new Point(P.X, P.Y + 2));
-                    invalidEnemyLocs.Add(new Point(P.X, P.Y + 1));
-                    invalidEnemyLocs.Add(new Point(P.X - 2, P.Y));
-                    invalidEnemyLocs.Add(new Point(P.X - 1, P.Y));
-                    invalidEnemyLocs.Add(new Point(P.X + 2, P.Y));
-                    invalidEnemyLocs.Add(new Point(P.X + 1, P.Y));
+                    Point P = new Point(rand.Next(0, (activeMap.xLength - 16)), rand.Next(0, (activeMap.yLength - 16)));
+                    if (!invalidEnemyLocs.Contains(P) && (activeMap.mapImageNums[P.Y + 8][P.X + 8] == "003" || activeMap.mapImageNums[P.Y + 8][P.X + 8] == "002" || activeMap.mapImageNums[P.Y + 8][P.X + 8] == "001"))
+                    {
+                        enemyLocs.Add(P);
+                        invalidEnemyLocs.Add(new Point(P.X, P.Y));
+                        invalidEnemyLocs.Add(new Point(P.X - 1, P.Y - 1));
+                        invalidEnemyLocs.Add(new Point(P.X - 1, P.Y + 1));
+                        invalidEnemyLocs.Add(new Point(P.X + 1, P.Y - 1));
+                        invalidEnemyLocs.Add(new Point(P.X + 1, P.Y + 1));
+                        invalidEnemyLocs.Add(new Point(P.X, P.Y - 2));
+                        invalidEnemyLocs.Add(new Point(P.X, P.Y - 1));
+                        invalidEnemyLocs.Add(new Point(P.X, P.Y + 2));
+                        invalidEnemyLocs.Add(new Point(P.X, P.Y + 1));
+                        invalidEnemyLocs.Add(new Point(P.X - 2, P.Y));
+                        invalidEnemyLocs.Add(new Point(P.X - 1, P.Y));
+                        invalidEnemyLocs.Add(new Point(P.X + 2, P.Y));
+                        invalidEnemyLocs.Add(new Point(P.X + 1, P.Y));
+                    }
+                    else
+                    {
+                        i--;
+                    }
                 }
-                else
+            }
+            else
+            {
+                foreach(Point mel in activeMap.mapEnemyLocs)
                 {
-                    i--;
+                    enemyLocs.Add(mel);
                 }
             }
 
@@ -160,13 +162,14 @@ namespace DougieMcDungeons.Classes
 
         private void teleport()
         {
+            player.totalStats["hp"] = player.totalStats["maxhp"];//Temporary heal hack on map change
             mapString = activeMap.returnMapString(playerX, playerY);
             playerX = Convert.ToInt32(mapString.Substring(3, 3));
             playerY = Convert.ToInt32(mapString.Substring(6, 3));
             mapName = mapString.Substring(9);
             coordinates = ("Coordinates: " + playerX.ToString() + ", " + playerY.ToString());
-            Form1.UpdateForm.NewFormEvent(2, "You have now entered " + mapName);
             loadMap(mapName);
+            Form1.UpdateForm.NewFormEvent(2, "You have now entered " + mapName);
         }
 
         public void NotifyPropertyChanged(string propertyName)
@@ -187,15 +190,48 @@ namespace DougieMcDungeons.Classes
         {
             if (player.skillSet[playerAtk].name != "None")
             {
-                activeMap.enemiesOnMap[target].hp -= player.skillSet[playerAtk].attack(activeMap.enemiesOnMap[target]);
-                if (activeMap.enemiesOnMap[target].hp <= 0)
+                if (player.skillSet[playerAtk].cooldown == 0)
                 {
-                    Form1.UpdateForm.NewFormEvent(1, "You have defeated the " + activeMap.enemiesOnMap[target].type);
-                    activeMap.enemiesOnMap.RemoveAt(target);
-                    enemyLocs.RemoveAt(target);
-                    inBattle = false;
-                }
-            }
+                    activeMap.enemiesOnMap[target].hp -= player.skillSet[playerAtk].attack(activeMap.enemiesOnMap[target]);
+
+                    foreach(Skill ski in player.skillSet)
+                    {
+                        ski.cooldown--;
+                    }
+
+                    if (activeMap.enemiesOnMap[target].hp <= 0)
+                    {
+                        Form1.UpdateForm.NewFormEvent(1, "You have defeated the " + activeMap.enemiesOnMap[target].type + ".");
+
+                        string loot = activeMap.enemiesOnMap[target].lootRoll();
+                        if (loot != "0")
+                        {
+                            Form1.UpdateForm.NewFormEvent(1, "You have found " + loot + "!");
+                            if (loot.Substring(0, 7).Equals("Essence"))
+                            {
+                                player.essenceInventory.Add(new Essence(loot));
+                            }
+                            else
+                            {
+                                player.equipmentInventory.Add(new Equipment(loot));
+                            }
+                        }
+
+                        activeMap.enemiesOnMap.RemoveAt(target);
+                        enemyLocs.RemoveAt(target);
+                        inBattle = false;
+                    }
+                    else
+                    {
+                        player.totalStats["hp"] -= activeMap.enemiesOnMap[target].attack(player);
+                        Form1.UpdateForm.NewFormEvent(6, "You have died a tragic death");
+                        if (player.totalStats["hp"] <= 0)
+                        {
+                            Form1.UpdateForm.NewFormEvent(1, "You have died a tragic death");
+                        }
+                    }
+                }//End check to make sure skill is off cooldown, else no action taken
+            }//End Check for skill name of "None" aka no action taken
         }
     }
 }
