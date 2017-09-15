@@ -76,6 +76,8 @@
             this.skill9Picture = new System.Windows.Forms.PictureBox();
             this.skill0Picture = new System.Windows.Forms.PictureBox();
             this.skillsButton = new System.Windows.Forms.Button();
+            this.skillNameLabel = new System.Windows.Forms.Label();
+            this.skillCooldownLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.skill1Picture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.skill2Picture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.skill3Picture)).BeginInit();
@@ -414,6 +416,7 @@
             this.skill1Picture.Size = new System.Drawing.Size(25, 25);
             this.skill1Picture.TabIndex = 35;
             this.skill1Picture.TabStop = false;
+            this.skill1Picture.Click += new System.EventHandler(this.skillPictureOnClick);
             // 
             // skill2Picture
             // 
@@ -422,6 +425,7 @@
             this.skill2Picture.Size = new System.Drawing.Size(25, 25);
             this.skill2Picture.TabIndex = 36;
             this.skill2Picture.TabStop = false;
+            this.skill2Picture.Click += new System.EventHandler(this.skillPictureOnClick);
             // 
             // skill3Picture
             // 
@@ -430,6 +434,7 @@
             this.skill3Picture.Size = new System.Drawing.Size(25, 25);
             this.skill3Picture.TabIndex = 37;
             this.skill3Picture.TabStop = false;
+            this.skill3Picture.Click += new System.EventHandler(this.skillPictureOnClick);
             // 
             // skill4Picture
             // 
@@ -438,6 +443,7 @@
             this.skill4Picture.Size = new System.Drawing.Size(25, 25);
             this.skill4Picture.TabIndex = 38;
             this.skill4Picture.TabStop = false;
+            this.skill4Picture.Click += new System.EventHandler(this.skillPictureOnClick);
             // 
             // skill5Picture
             // 
@@ -446,6 +452,7 @@
             this.skill5Picture.Size = new System.Drawing.Size(25, 25);
             this.skill5Picture.TabIndex = 39;
             this.skill5Picture.TabStop = false;
+            this.skill5Picture.Click += new System.EventHandler(this.skillPictureOnClick);
             // 
             // skill6Picture
             // 
@@ -454,6 +461,7 @@
             this.skill6Picture.Size = new System.Drawing.Size(25, 25);
             this.skill6Picture.TabIndex = 40;
             this.skill6Picture.TabStop = false;
+            this.skill6Picture.Click += new System.EventHandler(this.skillPictureOnClick);
             // 
             // skill7Picture
             // 
@@ -462,6 +470,7 @@
             this.skill7Picture.Size = new System.Drawing.Size(25, 25);
             this.skill7Picture.TabIndex = 41;
             this.skill7Picture.TabStop = false;
+            this.skill7Picture.Click += new System.EventHandler(this.skillPictureOnClick);
             // 
             // skill8Picture
             // 
@@ -470,6 +479,7 @@
             this.skill8Picture.Size = new System.Drawing.Size(25, 25);
             this.skill8Picture.TabIndex = 42;
             this.skill8Picture.TabStop = false;
+            this.skill8Picture.Click += new System.EventHandler(this.skillPictureOnClick);
             // 
             // skill9Picture
             // 
@@ -478,6 +488,7 @@
             this.skill9Picture.Size = new System.Drawing.Size(25, 25);
             this.skill9Picture.TabIndex = 43;
             this.skill9Picture.TabStop = false;
+            this.skill9Picture.Click += new System.EventHandler(this.skillPictureOnClick);
             // 
             // skill0Picture
             // 
@@ -486,6 +497,7 @@
             this.skill0Picture.Size = new System.Drawing.Size(25, 25);
             this.skill0Picture.TabIndex = 44;
             this.skill0Picture.TabStop = false;
+            this.skill0Picture.Click += new System.EventHandler(this.skillPictureOnClick);
             // 
             // skillsButton
             // 
@@ -497,11 +509,31 @@
             this.skillsButton.UseVisualStyleBackColor = true;
             this.skillsButton.Click += new System.EventHandler(this.skillsButton_Click);
             // 
+            // skillNameLabel
+            // 
+            this.skillNameLabel.AutoSize = true;
+            this.skillNameLabel.Location = new System.Drawing.Point(633, 384);
+            this.skillNameLabel.Name = "skillNameLabel";
+            this.skillNameLabel.Size = new System.Drawing.Size(58, 13);
+            this.skillNameLabel.TabIndex = 46;
+            this.skillNameLabel.Text = "Skill: None";
+            // 
+            // skillCooldownLabel
+            // 
+            this.skillCooldownLabel.AutoSize = true;
+            this.skillCooldownLabel.Location = new System.Drawing.Point(633, 397);
+            this.skillCooldownLabel.Name = "skillCooldownLabel";
+            this.skillCooldownLabel.Size = new System.Drawing.Size(66, 13);
+            this.skillCooldownLabel.TabIndex = 47;
+            this.skillCooldownLabel.Text = "Cooldown: 0";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 762);
+            this.Controls.Add(this.skillCooldownLabel);
+            this.Controls.Add(this.skillNameLabel);
             this.Controls.Add(this.skillsButton);
             this.Controls.Add(this.skill0Picture);
             this.Controls.Add(this.skill9Picture);
@@ -617,6 +649,8 @@
         private System.Windows.Forms.PictureBox skill9Picture;
         private System.Windows.Forms.PictureBox skill0Picture;
         private System.Windows.Forms.Button skillsButton;
+        private System.Windows.Forms.Label skillNameLabel;
+        private System.Windows.Forms.Label skillCooldownLabel;
     }
 }
 

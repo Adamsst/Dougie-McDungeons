@@ -7,8 +7,13 @@ NoStat Weapon,NoStat Weapon,,Weapon,0
 Basic Helm,Basic Helm,,Head,0,def,1
 Basic Helm[1],Basic Helm,[1],Head,1,def,1
 Short Sword,Short Sword,,Weapon,0,atk,3
-Novice Staff,Novice Staff,,Weapon,0,matk,2
-Tattered Shoes,Tattered Shoes,,Feet,0,mdef,1
-Ripped Gloves,Ripped Gloves,,Hands,0,mdef,1
+Short Sword[1],Short Sword,[1],Weapon,0,atk,3
+Novice Staff,Novice Staff,,Weapon,0,matk,2,mdef,2,def,2
+Tattered Shoes,Tattered Shoes,,Feet,0,mdef,1,matkhit,1
+Ripped Gloves,Ripped Gloves,,Hands,0,mdef,1,matkhit,1
 Plain Shirt,Plain Shirt,,Chest,0,maxhp,5
-Denim Shorts[1],Denim Shorts,[1],Legs,1
+Denim Shorts[1],Denim Shorts,[1],Legs,1,atkhit,1,matkhit,1
+Unruly Wand[1],Unruly Wand,[1],Weapon,1,matk,4
+Defenders Axe,Defenders Axe,,Weapon,0,def,3,mdef,3,atk,1,matk,1,atkhit,1,matkhit,1
+Casters Robe,Casters Robe,,Chest,0,maxhp,5,matk,2,mdef,1,matkhit,2
+Casters Robe[1],Casters Robe,[1],Chest,1,maxhp,5,matk,2,mdef,1,matkhit,2

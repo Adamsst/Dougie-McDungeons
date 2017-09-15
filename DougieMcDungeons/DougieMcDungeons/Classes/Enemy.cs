@@ -53,7 +53,7 @@ namespace DougieMcDungeons.Classes
             }
         }
 
-        public virtual int attack()
+        public virtual int attack(Player p)
         {
             return 0;
         }
@@ -71,8 +71,9 @@ namespace DougieMcDungeons.Classes
         {
             img = Properties.Resources.gnome;
         }
-        public override int attack()
+        public override int attack(Player p)
         {
+            Form1.UpdateForm.NewFormEvent(1, "Gnome sabotages you for 4 damage.");
             return 4;
         }
     }
@@ -82,9 +83,56 @@ namespace DougieMcDungeons.Classes
         {
             img = Properties.Resources.ooze;
         }
-        public override int attack()
+        public override int attack(Player p)
         {
-            return 2;
+            int totalDamage = 3;
+            int reducDamage = 0;
+            r = new Random();
+
+            for (int i = 0; i < p.totalStats["mdef"]; i++)
+            {
+                if (r.Next(0, 10) <= 1)//double the mdef chance
+                {
+                    reducDamage++;
+                }
+            }
+
+            Form1.UpdateForm.NewFormEvent(1, "Ooze stings for " + (totalDamage - reducDamage) + " damage.");
+            return (totalDamage - reducDamage);
+        }
+        public override string lootRoll()
+        {
+            r = new Random();
+            int lootNum = r.Next(0, 100);//0-99
+            Console.WriteLine(lootNum);
+            if (lootNum == 0)
+            {
+                return "Essence of Ooze";
+            }
+            else if (lootNum >= 1 && lootNum <= 5)
+            {
+                return "Ripped Gloves";
+            }
+            else if (lootNum >= 6 && lootNum <= 10)
+            {
+                return "Plain Shirt";
+            }
+            else if (lootNum >= 11 && lootNum <= 15)
+            {
+                return "Tattered Shoes";
+            }
+            else if (lootNum >= 16 && lootNum <= 17)
+            {
+                return "Novice Staff";
+            }
+            else if (lootNum == 18)
+            {
+                return "Casters Robe";
+            }
+            else
+            {
+                return "0";
+            }
         }
     }
     class Elephant : Enemy
@@ -93,8 +141,9 @@ namespace DougieMcDungeons.Classes
         {
             img = Properties.Resources.elephant;
         }
-        public override int attack()
+        public override int attack(Player p)
         {
+            Form1.UpdateForm.NewFormEvent(1, "Elephant stomps you for 3 damage.");
             return 3;
         }
     }
@@ -104,24 +153,25 @@ namespace DougieMcDungeons.Classes
         {
             img = Properties.Resources.pumpkin;
         }
-        public override int attack()
+        public override int attack(Player p)
         {
+            Form1.UpdateForm.NewFormEvent(1, "Pumpkin attacks for 1 damage.");
             return 1;
         }
         public override string lootRoll()
         {
             r = new Random();
-            int lootNum = r.Next(0, 100);
+            int lootNum = r.Next(0, 100);//0-99
             Console.WriteLine(lootNum);
-            if (lootNum >= 0 && lootNum <= 2)
+            if (lootNum == 0)
             {
                 return "Essence of Pumpkin";
             }
-            else if (lootNum >= 3 && lootNum <= 6)
+            else if (lootNum >= 1 && lootNum <= 5)
             {
                 return "Basic Helm";
             }
-            else if (lootNum == 7)
+            else if (lootNum >= 6 && lootNum <= 7)
             {
                 return "Short Sword";
             }
@@ -137,6 +187,23 @@ namespace DougieMcDungeons.Classes
             {
                 return "0";
             }
+        }
+    }
+
+    class Ghost : Enemy
+    {
+        public Ghost(string name) : base(name)
+        {
+            img = Properties.Resources.ghost;
+        }
+        public override int attack(Player p)
+        {
+            Form1.UpdateForm.NewFormEvent(1, "Ghost spooked you for " + "0" + " damage.");
+            return 0;
+        }
+        public override string lootRoll()
+        {
+            return "0";
         }
     }
 }

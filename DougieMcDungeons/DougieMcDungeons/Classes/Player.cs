@@ -34,7 +34,7 @@ namespace DougieMcDungeons.Classes
             baseStats.Add("atkcrit", 1);
             baseStats.Add("matkcrit", 1);
             baseStats.Add("atkhit", 70);
-            baseStats.Add("matkhit", 1);
+            baseStats.Add("matkhit", 50);
 
             bonusStats.Add("hp", 0);
             bonusStats.Add("maxhp", 0);
