@@ -43,6 +43,13 @@ namespace DougieMcDungeons
                             e.Graphics.DrawImage(theGame.activeMap.enemiesOnMap[i].img, theGame.map[(16 - theGame.playerX + theGame.enemyLocs[i].X), (16 - theGame.playerY + theGame.enemyLocs[i].Y)]);
                         }
                     }
+                    for (int i = 0; i < theGame.activeMap.mapVendorLocs.Count; i++)
+                    {
+                        if (theGame.activeMap.mapVendorLocs[i].X == (theGame.playerX - 16 + x) && theGame.activeMap.mapVendorLocs[i].Y == (theGame.playerY - 16 + y))
+                        {
+                            e.Graphics.DrawImage(theGame.activeMap.vendorsOnMap[i].img, theGame.map[(16 - theGame.playerX + theGame.activeMap.mapVendorLocs[i].X), (16 - theGame.playerY + theGame.activeMap.mapVendorLocs[i].Y)]);
+                        }
+                    }
                 }
             }
             e.Graphics.DrawImage(Properties.Resources.player2, theGame.map[8, 8]);
@@ -66,6 +73,9 @@ namespace DougieMcDungeons
                         break;
                     case Keys.D:
                         moveDirection = 'D';
+                        break;
+                    case Keys.Space:
+                        openVendor();
                         break;
                     case Keys.X:
                         moveDirection = null;
@@ -107,6 +117,23 @@ namespace DougieMcDungeons
                         theGame.battleTurn(9);
                         break;
                 }
+            }
+        }
+
+        private void openVendor()
+        {
+            string[] gameVendResponse = theGame.openVendor();
+            if(gameVendResponse[0] != "none")
+            {
+                movementTimer.Stop();
+                moveDirection = null;
+                updateMessageBox("You are now bargaining with " + gameVendResponse[0] + ".");
+                Vending vending = new Vending(gameVendResponse[0],gameVendResponse[1]);
+                vending.Show();
+            }
+            else
+            {
+                updateMessageBox("There are no vendors near by.");
             }
         }
 
@@ -153,6 +180,12 @@ namespace DougieMcDungeons
             {
                 playerLabelUpdate();
             }
+            else if (operation == 7)
+            {
+                updateMessageBox(message);
+                MessageBox.Show("You have died a tragic death.");
+                Application.Exit();
+            }
         }
 
         private void playerLabelUpdate()
@@ -166,6 +199,9 @@ namespace DougieMcDungeons
             matkcritLabel.Text = "MATK Crit: " + theGame.player.totalStats["matkcrit"];
             atkhitLabel.Text = "ATK Hit: " + theGame.player.totalStats["atkhit"];
             matkhitLabel.Text = "MATK Hit: " + theGame.player.totalStats["matkhit"];
+            expLabel.Text = "Exp: " + theGame.player.exp + "/" + theGame.player.expNeeded[theGame.player.level];
+            levelLabel.Text = "Level: " + theGame.player.level;
+            goldLabel.Text = "Gold: " + theGame.player.gold;
         }
 
         private void playerEquipLabelUpdate()

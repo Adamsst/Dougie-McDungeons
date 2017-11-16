@@ -196,6 +196,12 @@
   <data name="teleport1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\teleport1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="town1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\town1.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="vendors" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\vendors.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
   <data name="water1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\water1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

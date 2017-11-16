@@ -104,7 +104,7 @@
             // eModsLabel
             // 
             this.eModsLabel.AutoSize = true;
-            this.eModsLabel.Location = new System.Drawing.Point(253, 84);
+            this.eModsLabel.Location = new System.Drawing.Point(253, 70);
             this.eModsLabel.Name = "eModsLabel";
             this.eModsLabel.Size = new System.Drawing.Size(50, 13);
             this.eModsLabel.TabIndex = 20;
@@ -113,7 +113,7 @@
             // eSlotLabel
             // 
             this.eSlotLabel.AutoSize = true;
-            this.eSlotLabel.Location = new System.Drawing.Point(253, 67);
+            this.eSlotLabel.Location = new System.Drawing.Point(253, 53);
             this.eSlotLabel.Name = "eSlotLabel";
             this.eSlotLabel.Size = new System.Drawing.Size(33, 13);
             this.eSlotLabel.TabIndex = 19;
@@ -122,7 +122,7 @@
             // eLocLabel
             // 
             this.eLocLabel.AutoSize = true;
-            this.eLocLabel.Location = new System.Drawing.Point(253, 49);
+            this.eLocLabel.Location = new System.Drawing.Point(253, 35);
             this.eLocLabel.Name = "eLocLabel";
             this.eLocLabel.Size = new System.Drawing.Size(40, 13);
             this.eLocLabel.TabIndex = 18;
@@ -131,7 +131,7 @@
             // eNameLabel
             // 
             this.eNameLabel.AutoSize = true;
-            this.eNameLabel.Location = new System.Drawing.Point(252, 32);
+            this.eNameLabel.Location = new System.Drawing.Point(252, 18);
             this.eNameLabel.Name = "eNameLabel";
             this.eNameLabel.Size = new System.Drawing.Size(38, 13);
             this.eNameLabel.TabIndex = 17;

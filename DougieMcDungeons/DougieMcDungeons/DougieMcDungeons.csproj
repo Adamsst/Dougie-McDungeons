@@ -68,6 +68,7 @@
     <Compile Include="Classes\Map.cs" />
     <Compile Include="Classes\Player.cs" />
     <Compile Include="Classes\Skill.cs" />
+    <Compile Include="Classes\Vendor.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,6 +89,12 @@
     <Compile Include="Skills.Designer.cs">
       <DependentUpon>Skills.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vending.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vending.Designer.cs">
+      <DependentUpon>Vending.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -106,6 +113,9 @@
     </Compile>
     <EmbeddedResource Include="Skills.resx">
       <DependentUpon>Skills.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vending.resx">
+      <DependentUpon>Vending.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -169,6 +179,8 @@
     <None Include="Resources\teleport1.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\town1.csv" />
+    <None Include="Resources\vendors.csv" />
     <None Include="Resources\water1.png" />
   </ItemGroup>
   <ItemGroup>

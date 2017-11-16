@@ -78,6 +78,9 @@
             this.skillsButton = new System.Windows.Forms.Button();
             this.skillNameLabel = new System.Windows.Forms.Label();
             this.skillCooldownLabel = new System.Windows.Forms.Label();
+            this.levelLabel = new System.Windows.Forms.Label();
+            this.expLabel = new System.Windows.Forms.Label();
+            this.goldLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.skill1Picture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.skill2Picture)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.skill3Picture)).BeginInit();
@@ -123,7 +126,7 @@
             // healthLabel
             // 
             this.healthLabel.AutoSize = true;
-            this.healthLabel.Location = new System.Drawing.Point(633, 220);
+            this.healthLabel.Location = new System.Drawing.Point(633, 249);
             this.healthLabel.Name = "healthLabel";
             this.healthLabel.Size = new System.Drawing.Size(35, 13);
             this.healthLabel.TabIndex = 3;
@@ -132,7 +135,7 @@
             // atkLabel
             // 
             this.atkLabel.AutoSize = true;
-            this.atkLabel.Location = new System.Drawing.Point(633, 235);
+            this.atkLabel.Location = new System.Drawing.Point(633, 264);
             this.atkLabel.Name = "atkLabel";
             this.atkLabel.Size = new System.Drawing.Size(35, 13);
             this.atkLabel.TabIndex = 4;
@@ -141,7 +144,7 @@
             // defLabel
             // 
             this.defLabel.AutoSize = true;
-            this.defLabel.Location = new System.Drawing.Point(633, 265);
+            this.defLabel.Location = new System.Drawing.Point(633, 294);
             this.defLabel.Name = "defLabel";
             this.defLabel.Size = new System.Drawing.Size(35, 13);
             this.defLabel.TabIndex = 6;
@@ -150,7 +153,7 @@
             // matkLabel
             // 
             this.matkLabel.AutoSize = true;
-            this.matkLabel.Location = new System.Drawing.Point(633, 250);
+            this.matkLabel.Location = new System.Drawing.Point(633, 279);
             this.matkLabel.Name = "matkLabel";
             this.matkLabel.Size = new System.Drawing.Size(35, 13);
             this.matkLabel.TabIndex = 5;
@@ -159,7 +162,7 @@
             // atkcritLabel
             // 
             this.atkcritLabel.AutoSize = true;
-            this.atkcritLabel.Location = new System.Drawing.Point(633, 295);
+            this.atkcritLabel.Location = new System.Drawing.Point(633, 324);
             this.atkcritLabel.Name = "atkcritLabel";
             this.atkcritLabel.Size = new System.Drawing.Size(35, 13);
             this.atkcritLabel.TabIndex = 8;
@@ -168,7 +171,7 @@
             // mdefLabel
             // 
             this.mdefLabel.AutoSize = true;
-            this.mdefLabel.Location = new System.Drawing.Point(633, 280);
+            this.mdefLabel.Location = new System.Drawing.Point(633, 309);
             this.mdefLabel.Name = "mdefLabel";
             this.mdefLabel.Size = new System.Drawing.Size(35, 13);
             this.mdefLabel.TabIndex = 7;
@@ -177,7 +180,7 @@
             // atkhitLabel
             // 
             this.atkhitLabel.AutoSize = true;
-            this.atkhitLabel.Location = new System.Drawing.Point(633, 325);
+            this.atkhitLabel.Location = new System.Drawing.Point(633, 354);
             this.atkhitLabel.Name = "atkhitLabel";
             this.atkhitLabel.Size = new System.Drawing.Size(35, 13);
             this.atkhitLabel.TabIndex = 10;
@@ -186,7 +189,7 @@
             // matkcritLabel
             // 
             this.matkcritLabel.AutoSize = true;
-            this.matkcritLabel.Location = new System.Drawing.Point(633, 310);
+            this.matkcritLabel.Location = new System.Drawing.Point(633, 339);
             this.matkcritLabel.Name = "matkcritLabel";
             this.matkcritLabel.Size = new System.Drawing.Size(35, 13);
             this.matkcritLabel.TabIndex = 9;
@@ -195,7 +198,7 @@
             // matkhitLabel
             // 
             this.matkhitLabel.AutoSize = true;
-            this.matkhitLabel.Location = new System.Drawing.Point(633, 340);
+            this.matkhitLabel.Location = new System.Drawing.Point(633, 369);
             this.matkhitLabel.Name = "matkhitLabel";
             this.matkhitLabel.Size = new System.Drawing.Size(35, 13);
             this.matkhitLabel.TabIndex = 11;
@@ -512,7 +515,7 @@
             // skillNameLabel
             // 
             this.skillNameLabel.AutoSize = true;
-            this.skillNameLabel.Location = new System.Drawing.Point(633, 384);
+            this.skillNameLabel.Location = new System.Drawing.Point(633, 421);
             this.skillNameLabel.Name = "skillNameLabel";
             this.skillNameLabel.Size = new System.Drawing.Size(58, 13);
             this.skillNameLabel.TabIndex = 46;
@@ -521,17 +524,47 @@
             // skillCooldownLabel
             // 
             this.skillCooldownLabel.AutoSize = true;
-            this.skillCooldownLabel.Location = new System.Drawing.Point(633, 397);
+            this.skillCooldownLabel.Location = new System.Drawing.Point(633, 434);
             this.skillCooldownLabel.Name = "skillCooldownLabel";
             this.skillCooldownLabel.Size = new System.Drawing.Size(66, 13);
             this.skillCooldownLabel.TabIndex = 47;
             this.skillCooldownLabel.Text = "Cooldown: 0";
+            // 
+            // levelLabel
+            // 
+            this.levelLabel.AutoSize = true;
+            this.levelLabel.Location = new System.Drawing.Point(632, 220);
+            this.levelLabel.Name = "levelLabel";
+            this.levelLabel.Size = new System.Drawing.Size(45, 13);
+            this.levelLabel.TabIndex = 48;
+            this.levelLabel.Text = "Level: 0";
+            // 
+            // expLabel
+            // 
+            this.expLabel.AutoSize = true;
+            this.expLabel.Location = new System.Drawing.Point(632, 235);
+            this.expLabel.Name = "expLabel";
+            this.expLabel.Size = new System.Drawing.Size(37, 13);
+            this.expLabel.TabIndex = 49;
+            this.expLabel.Text = "Exp: 0";
+            // 
+            // goldLabel
+            // 
+            this.goldLabel.AutoSize = true;
+            this.goldLabel.Location = new System.Drawing.Point(633, 396);
+            this.goldLabel.Name = "goldLabel";
+            this.goldLabel.Size = new System.Drawing.Size(41, 13);
+            this.goldLabel.TabIndex = 50;
+            this.goldLabel.Text = "Gold: 0";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(784, 762);
+            this.Controls.Add(this.goldLabel);
+            this.Controls.Add(this.expLabel);
+            this.Controls.Add(this.levelLabel);
             this.Controls.Add(this.skillCooldownLabel);
             this.Controls.Add(this.skillNameLabel);
             this.Controls.Add(this.skillsButton);
@@ -651,6 +684,9 @@
         private System.Windows.Forms.Button skillsButton;
         private System.Windows.Forms.Label skillNameLabel;
         private System.Windows.Forms.Label skillCooldownLabel;
+        private System.Windows.Forms.Label levelLabel;
+        private System.Windows.Forms.Label expLabel;
+        private System.Windows.Forms.Label goldLabel;
     }
 }
 

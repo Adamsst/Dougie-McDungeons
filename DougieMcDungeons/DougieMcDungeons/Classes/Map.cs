@@ -18,6 +18,8 @@ namespace DougieMcDungeons.Classes
         private List<string> enemyTypes = new List<string>();
         public List<Point> mapEnemyLocs = new List<Point>();
         public List<Enemy> enemiesOnMap = new List<Enemy>();
+        public List<Point> mapVendorLocs = new List<Point>();
+        public List<Vendor> vendorsOnMap = new List<Vendor>();
         private Random rand = new Random();
 
         public Map(string mapName)
@@ -37,6 +39,10 @@ namespace DougieMcDungeons.Classes
             else if (mapName == "Spooky Ghosts Lair")
             {
                 mapFile = Properties.Resources.spookyghost.Split('\n');
+            }
+            else if (mapName == "town")
+            {
+                mapFile = Properties.Resources.town1.Split('\n');
             }
 
             for (int x = 0; x < mapFile.Length; x++)
@@ -108,6 +114,27 @@ namespace DougieMcDungeons.Classes
                     }
                 }
             }
+            i++;
+
+            while(mapImageNums[i][0].Substring(3) != "end")
+            {
+                switch (mapImageNums[i][0].Substring(3))
+                {
+                    case "skill":
+                        vendorsOnMap.Add(new skillVendor(mapImageNums[i+1][0].Substring(3)));
+                        break;
+                    default:
+                        break;
+                }
+                i++;
+                i++;
+            }
+
+            foreach(Vendor v in vendorsOnMap)
+            {
+                mapVendorLocs.Add(new Point(v.xLoc, v.yLoc));
+            }
+
 
 
         }
@@ -159,7 +186,7 @@ namespace DougieMcDungeons.Classes
 
         public bool canEnter(int x, int y)
         {
-            if (mapImageNums[y][x].Substring(0, 3) != "000" && mapImageNums[y][x].Substring(0, 3) != "005" && mapImageNums[y][x].Substring(0, 3) != "006")
+            if (mapImageNums[y][x].Substring(0, 3) != "000" && mapImageNums[y][x].Substring(0, 3) != "005" && mapImageNums[y][x].Substring(0, 3) != "006" && !mapVendorLocs.Contains(new Point(x-8,y-8)))
             {
                 return true;
             }
@@ -185,5 +212,7 @@ namespace DougieMcDungeons.Classes
         {
             return mapImageNums[y][x];
         }
+
+       
     }
 }

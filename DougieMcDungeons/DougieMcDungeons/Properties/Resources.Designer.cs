@@ -101,10 +101,12 @@ namespace DougieMcDungeons.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to elephant,20,1,1,1,1,1,1,1,1,1
-        ///gnome,25,1,1,1,1,1,1,1,1,1
-        ///ooze,15,1,1,1,1,1,1,1,1,1
-        ///pumpkin,10,1,1,1,1,1,1,1,1,1.
+        ///   Looks up a localized string similar to elephant,20,1,1,1,1,1,1,1,1,1,3
+        ///gnome,25,1,1,1,1,1,1,1,1,1,4
+        ///ooze,15,1,1,1,1,1,1,1,1,1,2
+        ///pumpkin,10,1,1,1,1,1,1,1,1,1,1
+        ///ghost,20,2,2,2,2,2,2,2,2,2,3
+        ///dragon,50,4,4,4,4,4,4,4,4,4,5.
         /// </summary>
         internal static string enemies {
             get {
@@ -122,10 +124,10 @@ namespace DougieMcDungeons.Properties {
         ///Basic Helm,Basic Helm,,Head,0,def,1
         ///Basic Helm[1],Basic Helm,[1],Head,1,def,1
         ///Short Sword,Short Sword,,Weapon,0,atk,3
-        ///Short Sword[1],Short Sword,[1],Weapon,0,atk,3
+        ///Short Sword[1],Short Sword,[1],Weapon,1,atk,3
         ///Novice Staff,Novice Staff,,Weapon,0,matk,2,mdef,2,def,2
-        ///Tattered Shoes,Tattered Shoes,,Feet,0,mdef,1,matkhit,1
-        ///Ripped Gloves,R [rest of string was truncated]&quot;;.
+        ///Tattered Shoes,Tattered Shoes,,Feet,0,def,1,matkhit,1
+        ///Tattered Shoes[1 [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string equipment {
             get {
@@ -137,7 +139,8 @@ namespace DougieMcDungeons.Properties {
         ///   Looks up a localized string similar to Essence of Pumpkin,Legs, of Pumpkin,maxhp,5
         ///Essence of Gnome,Head, of Gnome,atk,1
         ///Essence of Ooze,Feet, of Ooze,matk,3
-        ///Essence of Elephant,Hands, of Elephant,def,1,mdef,1.
+        ///Essence of Elephant,Hands, of Elephant,def,1,mdef,1
+        ///Essence of Ghost,Chest, of Ghost,atkcrit,1,matkcrit,1.
         /// </summary>
         internal static string essence {
             get {
@@ -156,8 +159,8 @@ namespace DougieMcDungeons.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 0006,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,999
-        ///0006,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,0 [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to 00016,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,999
+        ///00036,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000 [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string firstMap1 {
             get {
@@ -306,8 +309,8 @@ namespace DougieMcDungeons.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 0052,006,006,005,006,006,006,005,005,005,005,005,005,006,006,005,006,006,005,006,006,005,005,006,006,006
-        ///0052,005,005,006,006,005,005,006,005,006,005,006,006,005,006,006,005,005,006,006,006,005,006,006,005,006
+        ///   Looks up a localized string similar to 0055,006,006,005,006,006,006,005,005,005,005,005,005,006,006,005,006,006,005,006,006,005,005,006,006,006
+        ///0055,005,005,006,006,005,005,006,005,006,005,006,006,005,006,006,005,005,006,006,006,005,006,006,005,006
         ///0061,006,005,005,005,006,006,006,005,006,005,005,005,006,005,005,005,006,006,006,006,006,005,006,005,006
         ///0052,005,005,005,006,006,005,005,006,005,006,005,005,006,005,005,005,006,006,006,006,006,006,006,005,005
         ///006ghost,006,005,005,005,006,005,006,006,006,006,006,006,005,006,006,006,005,006,005,006 [rest of string was truncated]&quot;;.
@@ -335,6 +338,30 @@ namespace DougieMcDungeons.Properties {
             get {
                 object obj = ResourceManager.GetObject("teleport1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 0000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000
+        ///0000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000
+        ///0000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000
+        ///0000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000
+        ///000end,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000
+        ///000end,000,000,000,0 [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string town1 {
+            get {
+                return ResourceManager.GetString("town1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Octavius,sorcerersgambit,5,simplestrike,5
+        ///.
+        /// </summary>
+        internal static string vendors {
+            get {
+                return ResourceManager.GetString("vendors", resourceCulture);
             }
         }
         

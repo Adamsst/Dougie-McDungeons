@@ -60,7 +60,7 @@ namespace DougieMcDungeons
         {
             if (equipmentListBox.SelectedIndex >= 0 && essenceListBox.SelectedIndex >= 0)
             {
-                if (_equipList[equipmentListBox.SelectedIndex].location == _essenceList[essenceListBox.SelectedIndex].location)
+                if (_equipList[equipmentListBox.SelectedIndex].location == _essenceList[essenceListBox.SelectedIndex].location && _equipList[equipmentListBox.SelectedIndex].slots > 0.3)
                 {
                     Form1.UpdateForm.NewFormEvent(1, "You have imbued the " + _equipList[equipmentListBox.SelectedIndex].name + " with an " + _essenceList[essenceListBox.SelectedIndex].name + "!");
                     _equipList[equipmentListBox.SelectedIndex].ess = _essenceList[essenceListBox.SelectedIndex];

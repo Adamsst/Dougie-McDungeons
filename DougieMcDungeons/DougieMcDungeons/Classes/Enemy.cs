@@ -21,6 +21,7 @@ namespace DougieMcDungeons.Classes
         public int matkcrit = 0;
         public int atkhit = 0;
         public int matkhit = 0;
+        public int exp = 0;
         public string type = null;
         public Image img;
         protected Random r;
@@ -48,6 +49,7 @@ namespace DougieMcDungeons.Classes
                         matkcrit = Convert.ToInt32(values[8]);
                         atkhit = Convert.ToInt32(values[9]);
                         matkhit = Convert.ToInt32(values[10]);
+                        exp = Convert.ToInt32(values[11]);
                     }
                 }
             }
@@ -63,6 +65,11 @@ namespace DougieMcDungeons.Classes
             return "0";
         }
 
+        public virtual int goldRoll()
+        {
+            return (r.Next(0,(2*exp)) + 1);
+        }
+
     }
 
     class Gnome : Enemy
@@ -73,8 +80,52 @@ namespace DougieMcDungeons.Classes
         }
         public override int attack(Player p)
         {
-            Form1.UpdateForm.NewFormEvent(1, "Gnome sabotages you for 4 damage.");
-            return 4;
+            int totalDamage = 4;
+            int reducDamage = 0;
+            r = new Random();
+            for (int i = 0; i < p.totalStats["def"]; i++)
+            {
+                if (r.Next(0, 9) <= 1)//double the def chance
+                {
+                    reducDamage++;
+                }
+            }
+            if (r.Next(0, 9) == 0)//10% crit on gnomies
+            {
+                totalDamage += 4;
+                Form1.UpdateForm.NewFormEvent(1, "Gnome critically stabs you for " + Math.Max(0, (totalDamage - reducDamage)) + " damage.");
+            }
+            else
+            {
+                Form1.UpdateForm.NewFormEvent(1, "Gnome stabs you for " + Math.Max(0, (totalDamage - reducDamage)) + " damage.");
+            }
+            return Math.Max(0, (totalDamage - reducDamage));
+        }
+        public override string lootRoll()
+        {
+            r = new Random();
+            int lootNum = r.Next(0, 100);//0-99
+            Console.WriteLine(lootNum);
+            if (lootNum == 0)
+            {
+                return "Essence of Gnome";
+            }
+            else if (lootNum >= 1 && lootNum <= 10)
+            {
+                return "Gold";
+            }
+            else if (lootNum == 11)
+            {
+                return "Defenders Axe";
+            }
+            else if (lootNum == 12)
+            {
+                return "Tattered Shoes[1]";
+            }
+            else
+            {
+                return "0";
+            }
         }
     }
     class Ooze : Enemy
@@ -85,20 +136,20 @@ namespace DougieMcDungeons.Classes
         }
         public override int attack(Player p)
         {
-            int totalDamage = 3;
+            int totalDamage = 2;
             int reducDamage = 0;
             r = new Random();
 
             for (int i = 0; i < p.totalStats["mdef"]; i++)
             {
-                if (r.Next(0, 10) <= 1)//double the mdef chance
+                if (r.Next(0, 9) <= 1)//double the mdef chance
                 {
                     reducDamage++;
                 }
             }
 
-            Form1.UpdateForm.NewFormEvent(1, "Ooze stings for " + (totalDamage - reducDamage) + " damage.");
-            return (totalDamage - reducDamage);
+            Form1.UpdateForm.NewFormEvent(1, "Ooze stings for " + Math.Max(0,(totalDamage - reducDamage)) + " damage.");
+            return Math.Max(0, (totalDamage - reducDamage));
         }
         public override string lootRoll()
         {
@@ -129,6 +180,10 @@ namespace DougieMcDungeons.Classes
             {
                 return "Casters Robe";
             }
+            else if (lootNum >= 19 && lootNum <= 20)
+            {
+                return "Gold";
+            }
             else
             {
                 return "0";
@@ -143,8 +198,50 @@ namespace DougieMcDungeons.Classes
         }
         public override int attack(Player p)
         {
-            Form1.UpdateForm.NewFormEvent(1, "Elephant stomps you for 3 damage.");
-            return 3;
+            int totalDamage = 3;
+            int reducDamage = 0;
+            r = new Random();
+
+            for (int i = 0; i < p.totalStats["def"]; i++)
+            {
+                if (r.Next(0, 9) == 0)
+                {
+                    reducDamage++;
+                }
+            }
+
+            Form1.UpdateForm.NewFormEvent(1, "Elephant stomps you for " + Math.Max(0, (totalDamage - reducDamage)) + " damage.");
+            return Math.Max(0, (totalDamage - reducDamage));
+        }
+        public override string lootRoll()
+        {
+            r = new Random();
+            int lootNum = r.Next(0, 100);//0-99
+            Console.WriteLine(lootNum);
+            if (lootNum == 0)
+            {
+                return "Essence of Elephant";
+            }
+            else if (lootNum >= 1 && lootNum <= 10)
+            {
+                return "Gold";
+            }
+            else if (lootNum == 11)
+            {
+                return "Short Sword[1]";
+            }
+            else if (lootNum >= 12 && lootNum <= 13)
+            {
+                return "Casters Robe";
+            }
+            else if (lootNum == 14)
+            {
+                return "Ripped Gloves[1]";
+            }
+            else
+            {
+                return "0";
+            }
         }
     }
     class Pumpkin : Enemy
@@ -183,13 +280,16 @@ namespace DougieMcDungeons.Classes
             {
                 return "Denim Shorts[1]";
             }
+            else if (lootNum >= 17 && lootNum <= 20)
+            {
+                return "Gold";
+            }
             else
             {
                 return "0";
             }
         }
     }
-
     class Ghost : Enemy
     {
         public Ghost(string name) : base(name)
@@ -198,12 +298,53 @@ namespace DougieMcDungeons.Classes
         }
         public override int attack(Player p)
         {
-            Form1.UpdateForm.NewFormEvent(1, "Ghost spooked you for " + "0" + " damage.");
-            return 0;
+            int totalDamage = 3;
+            int reducDamage = 0;
+            r = new Random();
+
+            for (int i = 0; i < p.totalStats["def"]; i++)
+            {
+                if (r.Next(0, 9) == 0)
+                {
+                    reducDamage++;
+                }
+            }
+            for (int i = 0; i < p.totalStats["mdef"]; i++)
+            {
+                if (r.Next(0, 9) == 0)
+                {
+                    reducDamage++;
+                }
+            }
+
+            Form1.UpdateForm.NewFormEvent(1, "Ghost spooked you for " + Math.Max(0, (totalDamage - reducDamage)) + " damage.");
+            return Math.Max(0, (totalDamage - reducDamage));
         }
         public override string lootRoll()
         {
-            return "0";
+            r = new Random();
+            int lootNum = r.Next(0, 100);//0-99
+            Console.WriteLine(lootNum);
+            if (lootNum == 0)
+            {
+                return "Essence of Ghost";
+            }
+            else if (lootNum >= 1 && lootNum <= 10)
+            {
+                return "Gold";
+            }
+            else if (lootNum == 11)
+            {
+                return "Unruly Wand[1]";
+            }
+            else if (lootNum == 12)
+            {
+                return "Casters Robe[1]";
+            }
+            else
+            {
+                return "0";
+            }
         }
     }
 }

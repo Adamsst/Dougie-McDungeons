@@ -19,6 +19,11 @@ namespace DougieMcDungeons.Classes
         public Equipment feet = null;
         public Equipment hands = null;
         public Equipment weapon = null;
+        public int gold = 0;
+        public int exp = 0;
+        public int level = 0;
+        public int[] expNeeded = new int[10] { 10, 20, 30, 45, 60, 80, 100, 125, 150, 200 };
+
         Random playerR = new Random();
         public string one = "Simple Strike";
         public string zero = "Exhausted Swing";
@@ -176,6 +181,49 @@ namespace DougieMcDungeons.Classes
             calculateTotalStats();
         }
 
+        public void levelUp(int xp)
+        {
+            exp += xp;
+            if(exp >= expNeeded[level] && level < expNeeded.Length - 1)
+            {
+                level++;
+                exp = 0;
+                levelUpStats(level);
+                totalStats["hp"] = baseStats["maxhp"];
+                addModsValue();
+                Form1.UpdateForm.NewFormEvent(1, "You have levelled up!");
+                Form1.UpdateForm.NewFormEvent(6, "No message");
+            }
+        }
+
+        private void levelUpStats(int lvl)
+        {
+            switch (lvl)
+            {
+                case 1:
+                case 2:
+                case 4:
+                case 5:
+                case 7:
+                case 8:
+                    baseStats["atkcrit"] += 1;
+                    baseStats["matkcrit"] += 1;
+                    baseStats["atkhit"] += 1;
+                    baseStats["matkhit"] += 1;
+                    baseStats["maxhp"] += 5;
+                    break;
+                case 3:
+                case 6:
+                case 9:
+                    baseStats["def"] += 1;
+                    baseStats["mdef"] += 1;
+                    baseStats["atk"] += 1;
+                    baseStats["matk"] += 1;
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 
 
